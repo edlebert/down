@@ -610,6 +610,32 @@ describe Down::ChunkedIO do
     end
   end
 
+  describe "#seek" do
+    describe "default" do
+      it "seeks cached file" do
+        io = chunked_io(chunks: ["ab", "c"].each)
+        io.seek(1)
+        assert_equal 1, io.pos
+        io.read
+      end
+    end
+
+    describe "SET" do
+      it "seeks cached file" do
+        io = chunked_io(chunks: ["ab", "c"].each)
+        io.seek(2)
+      end
+    end
+
+    describe "CUR" do
+      # describe
+    end
+
+    describe "END" do
+      # describe
+    end
+  end
+
   describe "#eof?" do
     it "returns false on nonzero chunks" do
       io = chunked_io(chunks: ["ab", "c"].each)
